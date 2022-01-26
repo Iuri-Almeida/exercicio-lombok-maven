@@ -28,4 +28,8 @@ public class RegisterController {
             writer.println(rebel.getName() + ";" + rebel.getAge() + ";" + rebel.getRace());
         }
     }
+
+    public boolean requestAccess(Rebel rebel) {
+        return rebel.getAge() > 20 && rebel.getAge() < 50;
+    }
 }

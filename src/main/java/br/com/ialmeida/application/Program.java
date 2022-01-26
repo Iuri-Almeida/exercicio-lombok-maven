@@ -13,7 +13,7 @@ public class Program {
         Scanner sc = new Scanner(System.in);
         RegisterController controller = new RegisterController();
 
-        System.out.println("Add your rebels!\n");
+        System.out.println("Rebels Registration!\n");
 
         while (controller.rebelsLength() < 10) {
             clearScreen();
@@ -33,9 +33,21 @@ public class Program {
 
             System.out.print("\nChoose: ");
             int raceOrdinal = sc.nextInt();
+
+            Rebel rebel = new Rebel(name, age, Race.values()[raceOrdinal]);
+
+            System.out.print("\nWanna join us? [y/n] ");
+            char answer = sc.next().toLowerCase().charAt(0);
             sc.nextLine();
 
-            controller.registerRebel(new Rebel(name, age, Race.values()[raceOrdinal]));
+            if (answer == 'y') {
+                if (controller.requestAccess(rebel)) {
+                    controller.registerRebel(rebel);
+                } else {
+                    System.out.println("\nACCESS DENIED!\n");
+                }
+            }
+
         }
 
         System.out.println("\nFinishing the registration and writing in the file `rebels.txt`!");
